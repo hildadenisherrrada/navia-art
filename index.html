@@ -533,6 +533,7 @@ document.addEventListener('click',e=>{if(e.target.closest('.card,.pill,.icon-btn
 
 /* Introduction: light on tap; skip enters immediately. Session flag only after entry. */
 const heroVideo=$('#heroVid');
+const introSessionKey='navia-intro-sparks-v1';
 heroVideo.defaultPlaybackRate=1.5;
 heroVideo.playbackRate=1.5;
 let entered=false;
@@ -540,7 +541,7 @@ function completeEntry(){
   $('#intro').classList.add('gone');
   document.body.classList.remove('locked');
   document.body.classList.add('entered');
-  try{sessionStorage.setItem('navia-lit','1')}catch(e){}
+  try{sessionStorage.setItem(introSessionKey,'1')}catch(e){}
   heroVideo.play().catch(()=>{});
 }
 function enter(skipAnimation=false){
@@ -553,7 +554,7 @@ function enter(skipAnimation=false){
 $('#candle').addEventListener('click',()=>enter());
 $('#enterBtn').addEventListener('click',()=>enter());
 $('#skip').addEventListener('click',()=>enter(true));
-try{if(sessionStorage.getItem('navia-lit')==='1'){entered=true;$('#intro').remove();document.body.classList.remove('locked');document.body.classList.add('entered');heroVideo.play().catch(()=>{})}}catch(e){}
+try{if(sessionStorage.getItem(introSessionKey)==='1'){entered=true;$('#intro').remove();document.body.classList.remove('locked');document.body.classList.add('entered');heroVideo.play().catch(()=>{})}}catch(e){}
 
 /* glow follows finger */
 const glow=$('#glow');
