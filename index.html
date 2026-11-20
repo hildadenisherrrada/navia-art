@@ -74,11 +74,25 @@ header.solid{background:rgba(13,9,7,.78);backdrop-filter:blur(14px);-webkit-back
 #menu .close{position:absolute;top:16px;right:18px}
 
 /* ---------- hero video ---------- */
-.hero{position:relative;height:100svh;min-height:600px;overflow:hidden}
-.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,9,7,.55) 0,transparent 22%,transparent 70%,var(--bg) 100%)}
-.scroll-cue{position:absolute;z-index:3;bottom:22px;left:50%;transform:translateX(-50%);text-align:center;font-size:10px;letter-spacing:.45em;color:var(--gold2)}
-.scroll-cue i{display:block;width:1px;height:38px;margin:8px auto 0;background:linear-gradient(var(--gold),transparent);animation:drip 1.8s ease-in-out infinite}
+.hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+  padding:86px 22px 14px;
+  background:radial-gradient(ellipse at 50% 45%,var(--card),var(--bg) 75%);
+}
+.hero-frame{
+  width:min(100%, 380px, max(210px, calc((100svh - 165px) * .5625)));
+  aspect-ratio:9/16;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:24px;
+  box-shadow:0 14px 42px rgba(60,40,20,.16);
+}
+.hero video{width:100%;height:100%;object-fit:contain}
+.scroll-cue{text-align:center;font-size:10px;letter-spacing:.45em;color:var(--gold2)}
+.scroll-cue i{display:block;width:1px;height:20px;margin:6px auto 0;background:linear-gradient(var(--gold),transparent);animation:drip 1.8s ease-in-out infinite}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* ---------- marquee ---------- */
@@ -233,10 +247,7 @@ footer small{display:block;margin-top:30px;color:var(--muted);font-size:12px}
 /* beige theme overrides */
 .intro-txt .serif{color:#f1dcb0}.intro-txt .eyebrow{color:#d9b77c}.skip{color:#b9a68d}
 header.solid{background:rgba(233,217,195,.9)}
-header:not(.solid) .brand span{color:#fbf3e6;text-shadow:0 1px 8px rgba(0,0,0,.4)}
-header:not(.solid) .icon-btn{color:#fbf3e6;border-color:rgba(255,255,255,.45)}
 #menu{background:rgba(233,217,195,.98)}
-.scroll-cue{color:#fbf3e6}
 .season-banner h2{color:#f1dcb0}.season-banner h2 em{color:#fbf3e6}.season-banner p{color:#fbf3e6}.season-banner .eyebrow{color:#e8cf9f}
 .badge,.sound,.x,.fc .f span{color:#f6ecdc;background:rgba(40,28,20,.6)}
 .card{box-shadow:0 10px 26px rgba(90,60,30,.08)}
@@ -261,8 +272,8 @@ header:not(.solid) .icon-btn{color:#fbf3e6;border-color:rgba(255,255,255,.45)}
 #intro.igniting::before{opacity:1}
 #intro.igniting .candle{animation:candle-awaken 1.25s ease-out both}
 @keyframes candle-awaken{0%{filter:brightness(1)}55%{filter:brightness(1.15)}100%{filter:brightness(1.08)}}
-.hero video{opacity:0;transform:scale(1.018);transition:opacity 1.35s ease,transform 5s ease}
-body.entered .hero video{opacity:1;transform:scale(1)}
+.hero video{opacity:0;transition:opacity 1.35s ease}
+body.entered .hero video{opacity:1}
 header .brand{transition:opacity .7s ease,transform .7s ease}
 body:not(.entered) header .brand{opacity:0;transform:translateY(8px)}
 body.entered header .brand{opacity:1;transform:translateY(0)}
@@ -311,7 +322,9 @@ body.entered header .brand{opacity:1;transform:translateY(0)}
 <main id="top">
   <!-- HERO VIDEO -->
   <section class="hero">
-    <video id="heroVid" src="hero.mp4" poster="img/hero-poster.webp" muted playsinline loop preload="metadata"></video>
+    <div class="hero-frame">
+      <video id="heroVid" src="hero.mp4" poster="img/hero-poster.webp" muted playsinline loop preload="metadata"></video>
+    </div>
     <div class="scroll-cue">SCROLL<i></i></div>
   </section>
 
