@@ -342,7 +342,7 @@ body.entered header .brand{opacity:1;transform:translateY(0)}
   </button>
   <div class="intro-txt">
     <div class="serif">Every candle has a story</div>
-    <button class="intro-enter" id="enterBtn" type="button">Enter Navia Art</button>
+    <div class="tap-hint" aria-hidden="true">Tap the candle to enter</div>
   </div>
   <button class="skip" id="skip" type="button">Skip animation</button>
 </div>
@@ -555,10 +555,9 @@ function enter(skipAnimation=false){
   entered=true;
   if(skipAnimation || window.matchMedia('(prefers-reduced-motion: reduce)').matches){completeEntry();return}
   igniteSound();$('#intro').classList.add('igniting');$('#candle').classList.add('lit');
-  setTimeout(completeEntry,800);
+  setTimeout(completeEntry,450);
 }
 $('#candle').addEventListener('click',()=>enter());
-$('#enterBtn').addEventListener('click',()=>enter());
 $('#skip').addEventListener('click',()=>enter(true));
 try{if(sessionStorage.getItem(introSessionKey)==='1'){entered=true;$('#intro').remove();document.body.classList.remove('locked');document.body.classList.add('entered');heroVideo.play().catch(()=>{})}}catch(e){}
 
