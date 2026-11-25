@@ -367,14 +367,14 @@ body.entered header .brand{opacity:1;transform:translateY(0)}
   <a href="#drinks">Drink Candles</a>
   <a href="#sweets">Sweet Treats</a>
   <a href="#melts">Wax Melts</a>
-  <a href="./sachets.html">Wax Sachets</a>
+  <a href="#sachets">Wax Sachets</a>
   <a href="#why">Why Navia?</a>
   <a href="#founder">Meet Mimi</a>
   <a href="#order">How to Order</a>
 </nav>
 
 <main id="top">
-<section id="sachets" aria-label="Wax Sachets featured collection"><iframe id="sachetsShowcase" src="sachets-showcase.html" title="Wax Sachets — Navia Art" loading="eager" allow="autoplay" style="display:block;border:0;width:100%;height:1600px;background:#e9d9c3"></iframe></section>
+
   <!-- HERO VIDEO -->
   <section class="hero">
     <div class="hero-frame">
@@ -497,7 +497,7 @@ body.entered header .brand{opacity:1;transform:translateY(0)}
   <a href="#drinks">Drink Candles</a>
   <a href="#sweets">Sweet Treats</a>
   <a href="#melts">Wax Melts</a>
-  <a href="./sachets.html">Wax Sachets</a>
+  <a href="#sachets">Wax Sachets</a>
       <a href="#why">Why Navia?</a>
       <a href="https://www.instagram.com/naviamimi_luz/" target="_blank" rel="noopener">Instagram · @naviamimi_luz</a>
     </nav>
@@ -544,7 +544,7 @@ document.addEventListener('click',e=>{if(e.target.closest('.card,.pill,.icon-btn
 
 /* Introduction: light on tap; skip enters immediately. Session flag only after entry. */
 const heroVideo=$('#heroVid');
-const introSessionKey='navia-intro-sparks-v1';
+const introSessionKey='navia-intro-sparks-v2';
 heroVideo.defaultPlaybackRate=1.5;
 heroVideo.playbackRate=1.5;
 let entered=false;
@@ -560,7 +560,7 @@ function enter(skipAnimation=false){
   entered=true;
   if(skipAnimation || window.matchMedia('(prefers-reduced-motion: reduce)').matches){completeEntry();return}
   igniteSound();$('#intro').classList.add('igniting');$('#candle').classList.add('lit');
-  setTimeout(completeEntry,450);
+  setTimeout(completeEntry,2400);
 }
 $('#candle').addEventListener('click',()=>enter());
 $('#skip').addEventListener('click',()=>enter(true));
@@ -590,6 +590,7 @@ const snow=$('#snow');for(let i=0;i<34;i++){const s=document.createElement('i');
 /* rows */
 function card(i,badge,feat){const p=ITEMS[i],tag=p.soldOut?'Sold out':badge;return `<button class="card${feat?' feature':''}" data-i="${i}">${tag?`<span class="badge${p.soldOut?' sold-out':''}">${esc(tag)}</span>`:''}<div class="ph"><img src="${p.imgs[0]}" alt="${esc(p.name)}" loading="lazy"></div><div class="info"><h4>${esc(p.name)}</h4><div class="pr">${p.soldOut?'Sold out':p.price||'Tap for details'}</div></div><span class="more">+</span></button>`}
 $('#rows').innerHTML=ROWS.map(r=>`<section class="row" ${r.id?`id="${r.id}"`:''}><div class="wrap"><div class="row-head rv"><div><h3>${r.title}</h3><p>${r.sub}</p></div>${r.items.length>1?`<span class="count">${r.items.length} ${r.countLabel||'PIECES'} →</span>`:''}</div><div class="track">${r.items.map(n=>card(byName[n],(r.badges&&r.badges[n])||ITEMS[byName[n]].badge,r.items.length===1)).join('')}</div></div></section>`).join('');
+const sachetsSlot=document.createElement('div'); sachetsSlot.innerHTML="<section id=\"sachets\" aria-label=\"Wax Sachets featured collection\"><iframe id=\"sachetsShowcase\" src=\"sachets-showcase.html\" title=\"Wax Sachets — Navia Art\" loading=\"eager\" allow=\"autoplay\" style=\"display:block;border:0;width:100%;height:1600px;background:#e9d9c3\"></iframe></section>"; const meltsRow=document.getElementById('melts'); if(meltsRow)meltsRow.after(sachetsSlot.firstElementChild);
 
 let lastProductTrigger=null;
 document.addEventListener('click',e=>{const c=e.target.closest('.card');if(c){lastProductTrigger=c;openSheet(+c.dataset.i)}});
